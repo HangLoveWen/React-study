@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script src="../1.HelloReact/react.development.js"></script>
+  <script src="../1.HelloReact/react-dom.development.js"></script>
+  <script src="../1.HelloReact/babel.min.js"></script>
+  <script type="text/babel">
+    class Weather extends React.Component {
+      // constructor(props) {
+      //   super(props)
+      //   // this.state = { ishot: false }
+      //   // this.changeWeather = this.changeWeather.bind(this)
+      // }
+      state = { ishot: false, wind: '微风' }
+      render() {
+        const { ishot, wind } = this.state.ishot
+        return <h2 onClick={this.changeWeather}>今天天很{ishot ? '炎热' : '凉爽'}</h2>
+      }
+      //自定义方法-要用赋值语句的形式+箭头函数
+      changeWeather = () => {
+        const ishot = this.state.ishot
+        this.setState({ ishot: !ishot })
+      }
+    }
+    //渲染组件
+    ReactDOM.render(<Weather />, document.getElementById('test'))
+  </script>
+</body>
+
+</html>

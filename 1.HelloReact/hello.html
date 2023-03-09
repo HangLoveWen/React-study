@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hello</title>
+</head>
+<body>
+  <div id="test">
+
+  </div>
+  <script src="./react.development.js"></script>
+  <script src="./react-dom.development.js"></script>
+  <script src="./babel.min.js">
+      //引入babel，将jsx转为js
+  </script>
+
+  <script type="text/babel">
+    //此处一定要写babel
+    // 1.创建虚拟dom
+    const VDOM=<h1>Hello</h1>
+    //此处不是字符串
+    //2.渲染虚拟DOM到界面上
+    // ReactDOM.render(虚拟DOM,容器M)
+    ReactDOM.render(VDOM,document.querySelector('#test'))
+  </script>
+</body>
+</html>

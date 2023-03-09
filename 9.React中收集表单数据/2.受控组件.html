@@ -1,0 +1,47 @@
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script src="../1.HelloReact/react.development.js"></script>
+  <script src="../1.HelloReact/react-dom.development.js"></script>
+  <script src="../1.HelloReact/babel.min.js"></script>
+  <script type="text/babel">
+    //受控组件用来省略ref
+    class Login extends React.Component {
+      //初始化状态
+      state = { username: 'mh', password: '123' }
+      saveUsername = (event) => {
+        console.log(event.target.value);
+        this.setState({ username: event.target.value })
+      }
+      savePassword = (event) => {
+        console.log(event.target.value);
+        this.setState({ password: event.target.value })
+      }
+      handlerSubmit = (event) => {
+        //函数体
+        //组织表达的提交
+        event.preventDefault()
+        const { username, password } = this.state
+        alert(`你输入的用户名是：${username},你输入的密码是：${password}`);
+      }
+      render() {
+        return (
+          <form onSubmit={this.handlerSubmit}>
+            用户名：<input type="text" name='username' onChange={this.saveUsername} />
+            密码：<input type="password" name="passsword" onChange={this.savePassword} />
+            <button>登录</button>
+          </form>
+        )
+      }
+    }
+    ReactDOM.render(<Login />, document.getElementById('test'))
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="../1.HelloReact/babel.min.js"></script>
+  <script type="text/babel">
+    class Count extends React.Component {
+      constructor(props) {
+        console.log('Count---constructor');
+        super(props)
+        this.state = { num: 0 }
+      }
+      sum = () => {
+        let { num } = this.state
+        this.setState({ num: num + 1 })
+      }
+      //卸载组件按钮的回调
+      death = () => {
+        ReactDOM.unmountComponentAtNode(test)
+      }
+      //强制更新的按钮
+      force = () => {
+        this.forceUpdate()
+      }
+      //若state的值在任何时候都取决于props则可以使用
+      static getDerivedStateFromProps(props, state) {
+        console.log('Count--getDerivedStateFromProps', props, state);
+        return null
+      }
+      getSnapshotBeforeUpdate() {
+        console.log('count---getsnapshotbeforeupdate');
+        return null
+      }
+      //组件将要挂载
+      componentDidMount() {
+        console.log('Count---componentDidMount');
+      }
+      //组件将要卸载
+      componentWillUnmount() {
+        console.log('Count---componentWillUnMount');
+      }
+      //控制组件更新的‘阀门’
+      shouldComponentUpdate() {
+        console.log('Count---shouldComponentUpdate');
+        return true
+      }
+      //组件将要更新
+      componentDidUpdate(preprops, prestate, snapshotValue) {
+        console.log('Count---ComponentDidUpdate', preprops, prestate, snapshotValue);
+      }
+      // unmountComponentAtNode() {
+      //   console.log(' unmountComponentAtNode');
+      // }
+      render() {
+        console.log('Count---Render');
+        const { num } = this.state
+        return (
+          <div>
+            <h2>当前的和为：{num}</h2>
+            <button onClick={this.sum}>点我+1</button>
+            <button onClick={this.death}>卸载组件</button>
+            <button onClick={this.force}>不更改任何状态中的数据，强制更新一下</button>
+          </div>
+        )
+      }
+
+    }
+
+    ReactDOM.render(<Count count={199} />, document.getElementById('test'))
+  </script>
+</body>
+
+</html>

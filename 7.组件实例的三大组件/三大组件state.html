@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  7.组件实例的三大组件之state
+</head>
+
+<body>
+  <div id="test"></div>
+  <script src="../1.HelloReact/react.development.js"></script>
+  <script src="../1.HelloReact/react-dom.development.js"></script>
+  <script src="../1.HelloReact/babel.min.js"></script>
+  <script type="text/babel">
+    class Weather extends React.Component {
+      //构造器调用了几次---1次
+      constructor(props) {
+        console.log('constrctor');
+        super(props)
+        this.state = { ishot: false }
+        //解决changweather中this的指向问题
+        this.changeWeather = this.changeWeather.bind(this)
+      }
+      //render调用几次 ---1+n次 1是初始化的那次 n是状态更新的次数
+      render() {
+        console.log('render');
+        //读取状态
+        const { ishot } = this.state.ishot
+        return <h2 onClick={this.changeWeather}>今天天很{ishot ? '炎热' : '凉爽'}</h2>
+      }
+      //changeWeather调用几次 ---n次  n是点击的次数
+      changeWeather() {
+        //changWeather放在Weather的原型对象上,供实例使用
+        //由于changeWeather是作为onClick的回调，所以不是通过实例调用的，是直接调用
+        //类中的方法默认为开启了局部的严格模式，所以changeWeather中的this指向undefined
+        // console.log('标题被点击了')
+        const ishot = this.state.ishot
+        //注意：状态必须通过setState进行更新,且更新是合并不是替换
+        // console.log(this);
+        //严重注意：状态（state)不可直接更改，下面这行就是直接更改，要借助一个内置的API去更改
+        // this.state.ishot=!ishot这是错误的写法
+        this.setState({ ishot: !ishot })
+        // console.log(this.state.ishot);
+      }
+    }
+    //渲染组件
+    ReactDOM.render(<Weather />, document.getElementById('test'))
+  </script>
+</body>
+
+</html>

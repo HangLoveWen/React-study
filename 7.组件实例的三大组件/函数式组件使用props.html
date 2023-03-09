@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script src="../1.HelloReact/react.development.js"></script>
+  <script src="../1.HelloReact/react-dom.development.js"></script>
+  <script src="../1.HelloReact/babel.min.js"></script>
+  <script type="text/babel">
+    function Demo(props) {
+      const { name, age, sex } = props
+      return (
+        <ul>
+          <li>姓名:{name}</li>
+          <li>性别:{age}</li>
+          <li>年龄:{sex}</li>
+        </ul>
+      )
+    }
+    ReactDOM.render(<Demo name='jerry' sex='女' age={18} />, document.getElementById('test'))
+    // 执行了ReactDOM.render。。。。
+    // 1.React解析组件标签，找到Mycoment组件
+    // 2.发现组件是使用函数定义的，随后调用该函数，将返回的虚拟DOM转为真实的DOM,随后呈现在页面中。
+  </script>
+</body>
+
+</html>

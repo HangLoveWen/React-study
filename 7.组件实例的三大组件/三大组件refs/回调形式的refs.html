@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <script src="../../1.HelloReact/react.development.js"></script>
+  <script src="../../1.HelloReact/react-dom.development.js"></script>
+  <script src="../../1.HelloReact/babel.min.js"></script>
+  <script type="text/babel">
+    //常见组件
+    class Demo extends React.Component {
+      state = { ishot: true }
+      //展示左侧输入框的数据
+      showData = () => {
+        // const input1 = this.input1.value
+        // alert(input1);
+        const { input1 } = this
+        alert(input1.value);
+      }
+      //展示右侧输入框的数据
+      showData2 = () => {
+        const { input2 } = this
+        alert(input2.value);
+      }
+      changeWeather = () => {
+        const { ishot } = this.state
+        this.setState({ ishot: !ishot })
+      }
+      saveInput = (c) => {
+        this.input1 = c
+        console.log('@', c);
+      }
+      render() {
+        const { ishot } = this.state
+        return (
+          <div>
+            <h2>今天天气很{ishot ? '凉爽' : '炎热'}</h2>
+            {/*<input ref={c => { this.input1 = c; console.log(c, '@'); }} type="text" placeholder="点击按钮显示数据" />&nbsp;*/}
+            <input ref={this.saveInput} type="text" placeholder="点击按钮显示数据" />&nbsp;*
+            <button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;
+            <input ref={currentNode => this.input2 = currentNode} onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" />
+            <button onClick={this.changeWeather}>点我切换天气</button>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Demo />, document.getElementById('test'))
+  </script>
+</body>
+
+</html>

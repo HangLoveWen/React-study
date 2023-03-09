@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <div id="test1"></div>
+  <div id="test2"></div>
+  <script src="../1.HelloReact/react.development.js"></script>
+  <script src="../1.HelloReact/react-dom.development.js"></script>
+  <script src="../1.HelloReact/babel.min.js"></script>
+
+  <script src="../1.HelloReact/prop-types.js"></script>
+  <script type="text/babel">
+    //常见组件
+    // 引入prop-typed,用于对组件标签属性进行限制
+    class Person extends React.Component {
+      render() {
+        const { name, age, gender } = this.props
+
+        return (
+          <ul>
+            <li>姓名:{name}</li>
+            <li>性别:{gender}</li>
+            <li>年龄:{age + 1}</li>
+          </ul>
+        )
+      }
+      //对标签属性进行类型、必要性的限制
+      static propTypes = {
+        name: PropTypes.string.isRequired,//限制name必传，且为字符串
+        age: PropTypes.number,//.isRequired,代表必填
+        gender: PropTypes.string,
+        speak: PropTypes.func,
+      }
+
+      //指定默认的标签属性值
+      static defaultProps = {
+        gender: '男',//性别默认值为男
+        age: 18
+      }
+    }
+    function speack() {
+      console.log('我会说话了');
+    }
+    const p = { name: '老刘', age: 20, gender: '女' }
+    ReactDOM.render(<Person {...p} />, document.getElementById('test'))
+    ReactDOM.render(<Person name="jerry" age={18} gender="女" speak={speack()} />, document.getElementById('test1'))
+    ReactDOM.render(<Person name="tom" age={22} gender="男" />, document.getElementById('test2'))
+  </script>
+</body>
+
+</html>

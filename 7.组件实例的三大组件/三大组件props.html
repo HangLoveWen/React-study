@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="test"></div>
+  <div id="test1"></div>
+  <div id="test2"></div>
+  <script src="../1.HelloReact/react.development.js"></script>
+  <script src="../1.HelloReact/react-dom.development.js"></script>
+  <script src="../1.HelloReact/babel.min.js"></script>
+  <script type="text/babel">
+    //常见组件
+    class Person extends React.Component {
+      render() {
+        const { name, age, gender } = this.props
+        //props是只读的，不允许修改
+        return (
+          <ul>
+            <li>姓名:{name}</li>
+            <li>性别:{gender}</li>
+            <li>年龄:{age + 1}</li>
+          </ul>
+        )
+      }
+    }
+    const p = { name: '老刘', age: 18, sex: '女' }
+    ReactDOM.render(<Person {...p} />, document.getElementById('test'))
+    ReactDOM.render(<Person name="jerry" age={18} gender="女" />, document.getElementById('test1'))
+    ReactDOM.render(<Person name="tom" age={22} gender="男" />, document.getElementById('test2'))
+  </script>
+</body>
+
+</html>
